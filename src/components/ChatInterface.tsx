@@ -525,6 +525,7 @@ export const ChatInterface: React.FC = () => {
                   isFavorite={favorites.includes(message.content)}
                   voiceRate={settings.voiceRate}
                   voicePitch={settings.voicePitch}
+                  language={language}
                 />
               ))}
               <div ref={messagesEndRef} />
