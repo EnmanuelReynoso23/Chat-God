@@ -5,6 +5,7 @@ import { X, BookOpen, Volume2, VolumeX, Copy, Check, ChevronLeft, ChevronRight }
 import { DAILY_VERSES } from '@/lib/prompts';
 import { DailyVerse } from '@/lib/types';
 import { Language, TRANSLATIONS } from '@/lib/i18n';
+import { speakSpiritualText } from '@/lib/voice';
 
 interface VerseModalProps {
   isOpen: boolean;
@@ -61,16 +62,15 @@ export const VerseModal: React.FC<VerseModalProps> = ({
       return;
     }
 
-    window.speechSynthesis.cancel();
     const text = `${currentVerse.text}. ${currentVerse.reference}. ${currentVerse.reflection}`;
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = language === 'he' ? 'he-IL' : language === 'en' ? 'en-US' : 'es-ES';
-    utterance.rate = 0.92;
-    utterance.onend = () => setIsPlayingAudio(false);
-    utterance.onerror = () => setIsPlayingAudio(false);
-
-    setIsPlayingAudio(true);
-    window.speechSynthesis.speak(utterance);
+    speakSpiritualText(text, {
+      language,
+      voiceRate: 0.88,
+      voicePitch: 0.98,
+      onStart: () => setIsPlayingAudio(true),
+      onEnd: () => setIsPlayingAudio(false),
+      onError: () => setIsPlayingAudio(false),
+    });
   };
 
   return (

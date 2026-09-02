@@ -46,4 +46,6 @@ export interface UserSettings {
   voicePitch: number;
   voiceRate: number;
   autoReadVoice: boolean;
+  selectedVoiceURI?: string;
+  voiceTone?: 'serene-male' | 'gentle-female' | 'natural-auto';
 }

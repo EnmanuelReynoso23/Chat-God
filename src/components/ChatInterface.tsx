@@ -546,6 +546,8 @@ export const ChatInterface: React.FC = () => {
                   voiceRate={settings.voiceRate}
                   voicePitch={settings.voicePitch}
                   language={language}
+                  selectedVoiceURI={settings.selectedVoiceURI}
+                  voiceTone={settings.voiceTone}
                 />
               ))}
               <div ref={messagesEndRef} />

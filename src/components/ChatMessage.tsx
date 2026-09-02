@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { Message } from '@/lib/types';
 import { Language } from '@/lib/i18n';
+import { speakSpiritualText } from '@/lib/voice';
 
 interface ChatMessageProps {
   message: Message;
@@ -23,6 +24,8 @@ interface ChatMessageProps {
   voiceRate?: number;
   voicePitch?: number;
   language?: Language;
+  selectedVoiceURI?: string;
+  voiceTone?: 'serene-male' | 'gentle-female' | 'natural-auto';
 }
 
 export const ChatMessage: React.FC<ChatMessageProps> = ({
@@ -30,10 +33,12 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   isStreaming,
   onToggleFavorite,
   isFavorite,
-  voiceRate = 0.95,
-  voicePitch = 1.0,
+  voiceRate = 0.88,
+  voicePitch = 0.98,
   language = 'es',
-}) => {
+  selectedVoiceURI,
+  voiceTone,
+}: ChatMessageProps & { selectedVoiceURI?: string; voiceTone?: 'serene-male' | 'gentle-female' | 'natural-auto' }) => {
   const isUser = message.role === 'user';
   const [copied, setCopied] = useState(false);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
@@ -61,31 +66,16 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
       return; 
     } 
     
-    window.speechSynthesis.cancel();
-
-    // Clean markdown characters before reading
-    const cleanText = message.content
-      .replace(/[#*`_>\[\]]/g, '')
-      .replace(/\(http[^\)]+\)/g, '');
-
-    const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.lang = language === 'he' ? 'he-IL' : language === 'en' ? 'en-US' : 'es-ES';
-    utterance.rate = voiceRate;
-    utterance.pitch = voicePitch;
-
-    // Pick language matching voice
-    const voices = window.speechSynthesis.getVoices();
-    const langPrefix = language === 'he' ? 'he' : language === 'en' ? 'en' : 'es';
-    const matchedVoice = voices.find(v => v.lang.startsWith(langPrefix));
-    if (matchedVoice) {
-      utterance.voice = matchedVoice;
-    }
-
-    utterance.onend = () => setIsPlayingAudio(false);
-    utterance.onerror = () => setIsPlayingAudio(false);
-
-    setIsPlayingAudio(true);
-    window.speechSynthesis.speak(utterance);
+    speakSpiritualText(message.content, {
+      language,
+      voiceRate,
+      voicePitch,
+      preferredURI: selectedVoiceURI,
+      preferredTone: voiceTone,
+      onStart: () => setIsPlayingAudio(true),
+      onEnd: () => setIsPlayingAudio(false),
+      onError: () => setIsPlayingAudio(false),
+    });
   };
 
   const handleShare = async () => {

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { X, Settings, Key, Cpu, Volume2, Trash2, Check, ShieldAlert } from 'lucide-react';
 import { UserSettings } from '@/lib/types';
+import { speakSpiritualText } from '@/lib/voice';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -114,22 +115,65 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
           {/* Voice Settings */}
           <div className="space-y-3 pt-2 border-t border-slate-800">
-            <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-              <Volume2 className="w-4 h-4 text-amber-400" /> Velocidad de Lectura por Voz
-            </label>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-semibold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                <Volume2 className="w-4 h-4" /> Voz & Tono Espiritual
+              </label>
+              <button
+                type="button"
+                onClick={() => {
+                  speakSpiritualText('La paz y la gracia del Señor estén siempre contigo y en tu hogar.', {
+                    language: 'es',
+                    voiceRate: current.voiceRate,
+                    voicePitch: current.voicePitch,
+                    preferredURI: current.selectedVoiceURI,
+                    preferredTone: current.voiceTone,
+                  });
+                }}
+                className="text-[11px] px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 transition-all font-medium"
+              >
+                🔊 Probar Voz
+              </button>
+            </div>
+
+            {/* Tone Selector */}
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { id: 'serene-male', label: 'Cálida & Solemne', sub: 'Masculina' },
+                { id: 'gentle-female', label: 'Suave & Dulce', sub: 'Femenina' },
+                { id: 'natural-auto', label: 'Natural Óptima', sub: 'Automática' },
+              ].map((tone) => (
+                <button
+                  key={tone.id}
+                  type="button"
+                  onClick={() => setCurrent({ ...current, voiceTone: tone.id as any })}
+                  className={`p-2.5 rounded-xl text-center border transition-all ${
+                    (current.voiceTone || 'serene-male') === tone.id
+                      ? 'bg-amber-500/20 border-amber-500/50 text-amber-200 font-semibold'
+                      : 'bg-slate-900/60 border-slate-800 text-slate-300 hover:border-slate-700'
+                  }`}
+                >
+                  <p className="text-xs">{tone.label}</p>
+                  <p className="text-[10px] text-slate-400 mt-0.5">{tone.sub}</p>
+                </button>
+              ))}
+            </div>
+
+            {/* Rate Slider */}
+            <div className="pt-2">
+              <div className="flex items-center justify-between text-xs text-slate-300 mb-1.5">
+                <span>Velocidad de Lectura (Calma y Serenidad)</span>
+                <span className="text-amber-400 font-mono">{current.voiceRate.toFixed(2)}x</span>
+              </div>
               <input
                 type="range"
-                min="0.7"
-                max="1.3"
+                min="0.75"
+                max="1.15"
                 step="0.05"
                 value={current.voiceRate}
                 onChange={(e) => setCurrent({ ...current, voiceRate: parseFloat(e.target.value) })}
                 className="w-full accent-amber-500 cursor-pointer"
               />
-              <span className="text-xs text-amber-400 font-mono w-10 text-right">
-                {current.voiceRate.toFixed(2)}x
-              </span>
             </div>
           </div>
 
