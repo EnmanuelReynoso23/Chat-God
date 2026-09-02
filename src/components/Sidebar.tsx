@@ -15,8 +15,9 @@ import {
   Sun,
   ShieldCheck
 } from 'lucide-react';
-import { Conversation, SpiritualMode, SpiritualPreset } from '@/lib/types';
+import { Conversation, SpiritualMode } from '@/lib/types';
 import { SPIRITUAL_PRESETS } from '@/lib/prompts';
+import { Language, TRANSLATIONS } from '@/lib/i18n';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -30,6 +31,7 @@ interface SidebarProps {
   onSelectMode: (mode: SpiritualMode) => void;
   favorites: string[];
   onSelectFavorite: (text: string) => void;
+  language: Language;
 }
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -53,7 +55,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onSelectMode,
   favorites,
   onSelectFavorite,
+  language,
 }) => {
+  const t = TRANSLATIONS[language];
+  const isRtl = language === 'he';
+
   return (
     <>
       {/* Backdrop for Mobile */}
@@ -66,15 +72,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Sidebar Drawer */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-72 sm:w-80 bg-celestial-900/95 backdrop-blur-xl border-r border-amber-500/15 flex flex-col transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed top-0 bottom-0 ${isRtl ? 'right-0 border-l' : 'left-0 border-r'} z-50 w-72 sm:w-80 bg-celestial-900/95 backdrop-blur-xl border-amber-500/15 flex flex-col transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : (isRtl ? 'translate-x-full' : '-translate-x-full')
         }`}
+        dir={isRtl ? 'rtl' : 'ltr'}
       >
         {/* Top Header */}
         <div className="p-4 border-b border-slate-800/80 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-amber-400" />
-            <span className="font-semibold text-slate-200 text-sm">Caminos de Reflexión</span>
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg overflow-hidden border border-amber-400/40">
+              <img src="/jesus_compassion.jpg" alt="Jesús" className="w-full h-full object-cover" />
+            </div>
+            <span className="font-semibold text-slate-200 text-sm">{t.appName}</span>
           </div>
           <button
             onClick={onClose}
@@ -94,46 +103,49 @@ export const Sidebar: React.FC<SidebarProps> = ({
             className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-semibold text-sm shadow-lg shadow-amber-500/20 transition-all hover:scale-[1.02]"
           >
             <Plus className="w-4 h-4 stroke-[2.5]" />
-            <span>Nuevo Diálogo</span>
+            <span>{t.newChat}</span>
           </button>
         </div>
 
         {/* Spiritual Focus Categories */}
         <div className="px-3 py-2">
           <p className="text-[11px] font-semibold uppercase tracking-wider text-amber-400/80 mb-2 px-1">
-            Modo Espiritual
+            {t.spiritualFocus}
           </p>
           <div className="grid grid-cols-2 gap-1.5">
-            {SPIRITUAL_PRESETS.map((preset) => (
-              <button
-                key={preset.id}
-                onClick={() => {
-                  onSelectMode(preset.id);
-                  onNewChat(preset.id);
-                  onClose();
-                }}
-                className={`flex items-center gap-2 p-2 rounded-lg text-xs text-left transition-all ${
-                  selectedMode === preset.id
-                    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 font-medium'
-                    : 'bg-slate-800/40 text-slate-300 hover:bg-slate-800 hover:text-white border border-transparent'
-                }`}
-              >
-                {iconMap[preset.icon] || <Sparkles className="w-4 h-4 text-amber-400" />}
-                <span className="truncate">{preset.name.split(' ')[0]}</span>
-              </button>
-            ))}
+            {SPIRITUAL_PRESETS.map((preset) => {
+              const translatedName = t.modes[preset.id === 'bible-study' ? 'bibleStudy' : (preset.id as keyof typeof t.modes)]?.name || preset.name;
+              return (
+                <button
+                  key={preset.id}
+                  onClick={() => {
+                    onSelectMode(preset.id);
+                    onNewChat(preset.id);
+                    onClose();
+                  }}
+                  className={`flex items-center gap-2 p-2 rounded-lg text-xs text-left transition-all ${
+                    selectedMode === preset.id
+                      ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 font-medium'
+                      : 'bg-slate-800/40 text-slate-300 hover:bg-slate-800 hover:text-white border border-transparent'
+                  }`}
+                >
+                  {iconMap[preset.icon] || <Sparkles className="w-4 h-4 text-amber-400" />}
+                  <span className="truncate">{translatedName.split(' ')[0]}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
         {/* Previous Conversations List */}
         <div className="flex-1 overflow-y-auto px-3 py-2 space-y-1">
           <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2 px-1">
-            Diálogos Anteriores ({conversations.length})
+            {t.history} ({conversations.length})
           </p>
 
           {conversations.length === 0 ? (
             <div className="p-4 text-center text-xs text-slate-500 italic">
-              No tienes diálogos guardados. Tus conversaciones se guardan automáticamente en tu dispositivo.
+              {t.noHistory}
             </div>
           ) : (
             conversations.map((conv) => (
@@ -151,12 +163,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
               >
                 <div className="flex items-center gap-2.5 min-w-0 flex-1">
                   <MessageSquare className="w-4 h-4 shrink-0 text-slate-400 group-hover:text-amber-400" />
-                  <span className="truncate font-medium">{conv.title || 'Diálogo de fe'}</span>
+                  <span className="truncate font-medium">{conv.title || t.newChat}</span>
                 </div>
                 <button
                   onClick={(e) => onDeleteConversation(conv.id, e)}
                   className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-md transition-all ml-1"
-                  title="Eliminar diálogo"
+                  title="Eliminar"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>
@@ -169,7 +181,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <div className="pt-4">
               <p className="text-[11px] font-semibold uppercase tracking-wider text-amber-400/80 mb-2 px-1 flex items-center gap-1.5">
                 <Heart className="w-3 h-3 fill-amber-400" />
-                Oraciones Guardadas ({favorites.length})
+                {t.savedPrayers} ({favorites.length})
               </p>
               <div className="space-y-1.5">
                 {favorites.map((fav, idx) => (
@@ -187,26 +199,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </div>
             </div>
           )}
-
-          {/* Prayer Inspiration Mini-Card */}
-          <div className="pt-3">
-            <div className="relative rounded-xl overflow-hidden border border-amber-500/20 p-3 bg-gradient-to-t from-slate-950 via-slate-900/90 to-transparent">
-              <img 
-                src="/images/prayer-peace.jpg" 
-                alt="Oración y Paz" 
-                className="absolute inset-0 w-full h-full object-cover opacity-20 -z-10"
-              />
-              <p className="text-[11px] font-semibold text-amber-300">Paz en tu Corazón</p>
-              <p className="text-[10px] text-slate-300 italic mt-0.5">"La paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones."</p>
-            </div>
-          </div>
         </div>
 
         {/* Footer info: 100% Private, No Login */}
         <div className="p-3 border-t border-slate-800/80 text-center">
           <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-            <span>100% Privado • Sin Autenticación</span>
+            <span>{t.privateBadge}</span>
           </div>
         </div>
       </aside>

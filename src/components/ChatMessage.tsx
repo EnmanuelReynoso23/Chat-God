@@ -111,14 +111,14 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         {/* Avatar */}
         <div className="shrink-0 mt-0.5">
           {isUser ? (
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 shadow-sm">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 shadow-sm shrink-0">
               <User className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
           ) : (
             <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden border border-amber-400/50 shadow-md shadow-amber-500/25 shrink-0">
               <img
-                src="/divine_avatar.jpg"
-                alt="Presencia Divina"
+                src="/jesus_compassion.jpg"
+                alt="Jesús"
                 className="w-full h-full object-cover"
               />
               <div className="absolute -inset-1 bg-amber-400/20 rounded-xl blur-sm -z-10 animate-pulse-glow" />
