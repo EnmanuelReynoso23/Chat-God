@@ -275,27 +275,47 @@ export const ChatInterface: React.FC = () => {
             } catch {
               accumulatedContent += line.substring(2);
             }
-          } else if (line.startsWith('d:') || line.startsWith('e:')) {
+          } else if (line.startsWith('3:')) {
+            // Protocol error line from AI SDK
+            console.warn('AI SDK stream error received:', line);
+            if (!accumulatedContent) {
+              accumulatedContent = language === 'he'
+                ? '🕊️ שגיאה בחיבור למודל הבינה המלאכותית. אנא נסה שוב בעוד מספר רגעים.'
+                : language === 'en'
+                ? '🕊️ Connection error with the AI model. Please try again in a few moments.'
+                : '🕊️ Hubo un inconveniente momentáneo con el servicio de IA. Por favor intenta de nuevo en unos segundos.';
+            }
+          } else if (line.startsWith('d:') || line.startsWith('e:') || line.startsWith('f:') || line.startsWith('2:') || line.startsWith('8:')) {
             continue;
-          } else if (line.length > 0 && !line.startsWith('8:') && !line.startsWith('2:')) {
+          } else if (line.length > 0 && !/^[0-9a-z]:/i.test(line)) {
             accumulatedContent += line;
           }
         }
 
-        setMessages((prev) =>
-          prev.map((msg) =>
-            msg.id === assistantMessageId
-              ? { ...msg, content: accumulatedContent }
-              : msg
-          )
-        );
+        if (accumulatedContent) {
+          setMessages((prev) =>
+            prev.map((msg) =>
+              msg.id === assistantMessageId
+                ? { ...msg, content: accumulatedContent }
+                : msg
+            )
+          );
+        }
       }
 
       // Finalize and save to conversation history
+      const finalContent = accumulatedContent || (
+        language === 'he'
+          ? '🕊️ לא התקבלה תגובה. אנא נסה שוב.'
+          : language === 'en'
+          ? '🕊️ No response received. Please try again.'
+          : '🕊️ No se recibió respuesta. Por favor intenta de nuevo.'
+      );
+
       const finalAssistantMessage: Message = {
         id: assistantMessageId,
         role: 'assistant',
-        content: accumulatedContent,
+        content: finalContent,
         createdAt: Date.now(),
       };
 

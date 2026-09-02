@@ -7,7 +7,7 @@ const FAVORITES_KEY = 'chat_dios_saved_prayers';
 
 export const DEFAULT_SETTINGS: UserSettings = {
   provider: 'server',
-  model: 'gemini-2.0-flash',
+  model: 'gemini-2.5-flash',
   voicePitch: 1.0,
   voiceRate: 0.95,
   autoReadVoice: false,
@@ -51,7 +51,13 @@ export const getStoredSettings = (): UserSettings => {
   if (typeof window === 'undefined') return DEFAULT_SETTINGS;
   try {
     const data = localStorage.getItem(SETTINGS_KEY);
-    return data ? { ...DEFAULT_SETTINGS, ...JSON.parse(data) } : DEFAULT_SETTINGS;
+    if (!data) return DEFAULT_SETTINGS;
+    const parsed = JSON.parse(data);
+    if (!parsed.model || parsed.model === 'gemini-2.0-flash' || parsed.model === 'gemini-1.5-flash') {
+      parsed.model = 'gemini-2.5-flash';
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(parsed));
+    }
+    return { ...DEFAULT_SETTINGS, ...parsed };
   } catch (error) {
     return DEFAULT_SETTINGS;
   }
