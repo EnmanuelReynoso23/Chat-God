@@ -57,7 +57,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onSelectFavorite,
   language,
 }) => {
-  const t = TRANSLATIONS[language];
+  const t = TRANSLATIONS[language] || TRANSLATIONS.es;
   const isRtl = language === 'he';
 
   return (
