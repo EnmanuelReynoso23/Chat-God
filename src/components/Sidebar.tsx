@@ -7,7 +7,6 @@ import {
   Plus, 
   X, 
   Heart, 
-  Sparkles, 
   HeartHandshake, 
   Flame, 
   BookOpen, 
@@ -35,12 +34,11 @@ interface SidebarProps {
 }
 
 const iconMap: Record<string, React.ReactNode> = {
-  Sparkles: <Sparkles className="w-4 h-4 text-amber-400" />,
+  Sun: <Sun className="w-4 h-4 text-amber-400" />,
   HeartHandshake: <HeartHandshake className="w-4 h-4 text-rose-400" />,
   Flame: <Flame className="w-4 h-4 text-amber-500" />,
   BookOpen: <BookOpen className="w-4 h-4 text-blue-400" />,
   Compass: <Compass className="w-4 h-4 text-emerald-400" />,
-  Sun: <Sun className="w-4 h-4 text-yellow-400" />,
 };
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -129,7 +127,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       : 'bg-slate-800/40 text-slate-300 hover:bg-slate-800 hover:text-white border border-transparent'
                   }`}
                 >
-                  {iconMap[preset.icon] || <Sparkles className="w-4 h-4 text-amber-400" />}
+                  {iconMap[preset.icon] || <Sun className="w-4 h-4 text-amber-400" />}
                   <span className="truncate">{translatedName.split(' ')[0]}</span>
                 </button>
               );

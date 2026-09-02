@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, BookOpen, Settings, Plus, Menu, Globe, HelpCircle } from 'lucide-react';
+import { BookOpen, Settings, Plus, Menu, Globe, HelpCircle } from 'lucide-react';
 import { SpiritualPreset } from '@/lib/types';
 import { Language, TRANSLATIONS } from '@/lib/i18n';
 

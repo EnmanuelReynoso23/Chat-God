@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, BookOpen, Volume2, VolumeX, Copy, Check, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { X, BookOpen, Volume2, VolumeX, Copy, Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import { DAILY_VERSES } from '@/lib/prompts';
 import { DailyVerse } from '@/lib/types';
 import { Language, TRANSLATIONS } from '@/lib/i18n';
@@ -182,7 +182,6 @@ export const VerseModal: React.FC<VerseModalProps> = ({
             }}
             className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-xs font-semibold shadow-md shadow-amber-500/20 transition-all"
           >
-            <Sparkles className="w-3.5 h-3.5" />
             <span>{t.reflectInChat}</span>
           </button>
         </div>

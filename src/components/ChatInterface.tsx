@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Sparkles, 
   Heart, 
   BookOpen, 
   Shield, 
@@ -429,11 +428,11 @@ export const ChatInterface: React.FC = () => {
                 onClick={() => setIsOnboardingOpen(true)}
                 title="Presencia de Cristo"
               >
-                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl overflow-hidden border-2 border-amber-400/60 shadow-2xl shadow-amber-500/40 animate-float transition-all group-hover:scale-105">
+                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl overflow-hidden border-2 border-amber-400/60 shadow-2xl shadow-amber-500/40 animate-float transition-all group-hover:scale-105 bg-slate-950">
                   <img 
                     src="/jesus_compassion.jpg" 
                     alt="Jesús" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-[center_15%]"
                   />
                 </div>
                 <div className="absolute -inset-2 bg-amber-400/25 rounded-3xl blur-2xl -z-10 animate-pulse-glow" />
@@ -545,6 +544,7 @@ export const ChatInterface: React.FC = () => {
           onStop={handleStop}
           suggestions={messages.length === 0 ? [] : currentModeInfo.suggestions.slice(0, 3)}
           onSelectSuggestion={(sug) => handleSendMessage(sug)}
+          suggestionsTitle={t.suggestionsTitle}
         />
       </div>
 

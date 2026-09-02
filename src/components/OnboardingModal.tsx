@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Sparkles, Globe, ArrowRight, ArrowLeft, Heart, BookOpen, ShieldCheck, Check, Cross } from 'lucide-react';
+import { Globe, ArrowRight, ArrowLeft, Heart, BookOpen, ShieldCheck, Check } from 'lucide-react';
 import { Language, TRANSLATIONS } from '@/lib/i18n';
 
 interface OnboardingModalProps {
@@ -126,18 +126,18 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
         </div>
 
         {/* Step Content */}
-        <div className="py-4 sm:py-6 overflow-y-auto space-y-4 flex-1">
-          {/* Image Feature */}
-          <div className="relative w-full h-48 sm:h-56 rounded-2xl overflow-hidden border border-amber-400/40 shadow-xl shadow-black/40 group">
+        <div className="py-4 sm:py-5 overflow-y-auto space-y-4 flex-1">
+          {/* Image Feature - Full Face Visibility */}
+          <div className="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden border border-amber-400/40 shadow-xl shadow-black/60 bg-slate-950">
             <img
               src={currentStepData.image}
               alt={currentStepData.title}
-              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+              className="w-full h-full object-cover object-[center_12%] transition-all duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-90" />
             <div className="absolute top-3 left-3">
-              <span className="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-slate-950/80 text-amber-300 border border-amber-400/40 backdrop-blur-md flex items-center gap-1.5 shadow-md">
-                <Sparkles className="w-3 h-3 text-amber-400" />
+              <span className="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-slate-950/85 text-amber-300 border border-amber-400/40 backdrop-blur-md flex items-center gap-1.5 shadow-md">
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
                 {currentStepData.badge}
               </span>
             </div>

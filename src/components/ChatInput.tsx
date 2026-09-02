@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import { Send, Square, Mic, MicOff, Sparkles, Compass } from 'lucide-react';
+import { Send, Square, Mic, MicOff, Compass } from 'lucide-react';
 
 interface ChatInputProps {
   input: string;
@@ -11,6 +11,7 @@ interface ChatInputProps {
   onStop: () => void;
   suggestions?: string[];
   onSelectSuggestion?: (suggestion: string) => void;
+  suggestionsTitle?: string;
 }
 
 export const ChatInput: React.FC<ChatInputProps> = ({
@@ -21,6 +22,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   onStop,
   suggestions = [],
   onSelectSuggestion,
+  suggestionsTitle,
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [isListening, setIsListening] = useState(false);
@@ -91,7 +93,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
       {suggestions.length > 0 && !input && (
         <div className="mb-3 flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-none no-scrollbar">
           <span className="text-[11px] font-medium text-amber-400/80 uppercase tracking-wider flex items-center gap-1 shrink-0">
-            <Sparkles className="w-3 h-3" /> Sugerencias:
+            {suggestionsTitle || 'Sugerencias:'}
           </span>
           {suggestions.map((sug, idx) => (
             <button

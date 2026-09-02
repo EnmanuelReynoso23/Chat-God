@@ -20,7 +20,7 @@ export const SPIRITUAL_PRESETS: SpiritualPreset[] = [
     id: 'general',
     name: 'Guía y Sabiduría',
     description: 'Conversación espiritual abierta, respuestas a tus preguntas y orientación diaria.',
-    icon: 'Sparkles',
+    icon: 'Sun',
     promptGreeting: 'Hijo mío / Amigo del alma, ¿qué anhelo o pregunta guarda tu corazón el día de hoy? Estoy aquí para escucharte en paz.',
     systemPromptModifier: 'Enfócate en escuchar activamente y brindar respuestas con sabiduría integral y amor.',
     suggestions: [

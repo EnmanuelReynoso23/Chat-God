@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, Settings, Key, Cpu, Volume2, Trash2, Check, ShieldAlert, Sparkles } from 'lucide-react';
+import { X, Settings, Key, Cpu, Volume2, Trash2, Check, ShieldAlert } from 'lucide-react';
 import { UserSettings } from '@/lib/types';
 
 interface SettingsModalProps {
@@ -166,7 +166,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             onClick={handleSave}
             className="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-xs font-semibold shadow-md shadow-amber-500/25 transition-all"
           >
-            {showSavedToast ? <Check className="w-3.5 h-3.5 text-slate-950" /> : <Sparkles className="w-3.5 h-3.5" />}
             <span>{showSavedToast ? 'Guardado' : 'Guardar Cambios'}</span>
           </button>
         </div>
