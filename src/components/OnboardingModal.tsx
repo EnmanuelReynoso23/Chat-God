@@ -14,11 +14,11 @@ interface OnboardingModalProps {
 export const OnboardingModal: React.FC<OnboardingModalProps> = ({
   isOpen,
   onClose,
-  language,
+  language = 'es',
   onSelectLanguage,
 }) => {
   const [step, setStep] = useState(0);
-  const t = TRANSLATIONS[language];
+  const t = TRANSLATIONS[language] || TRANSLATIONS.es;
   const isRtl = language === 'he';
 
   if (!isOpen) return null;

@@ -23,10 +23,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleSidebar,
   onOpenOnboarding,
   activePreset,
-  language,
+  language = 'es',
   onSelectLanguage,
 }) => {
-  const t = TRANSLATIONS[language];
+  const t = TRANSLATIONS[language] || TRANSLATIONS.es;
   const isRtl = language === 'he';
 
   return (
