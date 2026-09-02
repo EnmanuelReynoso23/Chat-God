@@ -381,12 +381,16 @@ export const ChatInterface: React.FC = () => {
           {messages.length === 0 ? (
             /* Welcome Celestial Hero */
             <div className="max-w-3xl mx-auto py-8 sm:py-12 px-4 flex flex-col items-center text-center space-y-6">
-              {/* Resplendent Halo Icon */}
+              {/* Resplendent Halo Icon with Divine Artwork */}
               <div className="relative group cursor-pointer" onClick={() => setIsVerseModalOpen(true)}>
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-amber-600 via-amber-500 to-yellow-300 flex items-center justify-center shadow-2xl shadow-amber-500/30 animate-float">
-                  <Sparkles className="w-10 h-10 sm:w-12 sm:h-12 text-slate-950" />
+                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl overflow-hidden border-2 border-amber-400/50 shadow-2xl shadow-amber-500/40 animate-float transition-all group-hover:scale-105">
+                  <img 
+                    src="/divine_avatar.jpg" 
+                    alt="Presencia Celestial" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <div className="absolute -inset-2 bg-amber-400/20 rounded-3xl blur-xl -z-10 animate-pulse-glow" />
+                <div className="absolute -inset-2 bg-amber-400/25 rounded-3xl blur-2xl -z-10 animate-pulse-glow" />
               </div>
 
               {/* Title & Introduction */}

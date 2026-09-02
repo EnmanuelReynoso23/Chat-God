@@ -97,16 +97,26 @@ export const VerseModal: React.FC<VerseModalProps> = ({
           </button>
         </div>
 
-        {/* Content */}
-        <div className="py-6 space-y-4">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-amber-400/90 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20">
+        {/* Image Banner */}
+        <div className="relative w-full h-32 rounded-2xl overflow-hidden mb-4 border border-amber-500/30">
+          <img 
+            src="/celestial_banner.jpg" 
+            alt="Horizonte Celestial" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+          <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between">
+            <span className="text-xs font-semibold uppercase tracking-wider text-amber-300 px-2.5 py-0.5 rounded-full bg-slate-950/70 border border-amber-500/30 backdrop-blur-sm">
               {currentVerse.category}
             </span>
-            <span className="text-xs text-slate-400">
+            <span className="text-xs text-slate-300 bg-slate-950/70 px-2 py-0.5 rounded-md backdrop-blur-sm">
               {currentIndex + 1} de {DAILY_VERSES.length}
             </span>
           </div>
+        </div>
+
+        {/* Content */}
+        <div className="space-y-4">
 
           {/* Scripture Verse Quote */}
           <blockquote className="text-base sm:text-lg font-serif italic text-amber-100/95 leading-relaxed bg-amber-950/20 p-5 rounded-2xl border-l-4 border-amber-500">

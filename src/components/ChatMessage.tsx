@@ -115,8 +115,12 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
               <User className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
           ) : (
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-amber-600 via-amber-500 to-yellow-300 flex items-center justify-center text-slate-950 shadow-md shadow-amber-500/25">
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden border border-amber-400/50 shadow-md shadow-amber-500/25 shrink-0">
+              <img
+                src="/divine_avatar.jpg"
+                alt="Presencia Divina"
+                className="w-full h-full object-cover"
+              />
               <div className="absolute -inset-1 bg-amber-400/20 rounded-xl blur-sm -z-10 animate-pulse-glow" />
             </div>
           )}

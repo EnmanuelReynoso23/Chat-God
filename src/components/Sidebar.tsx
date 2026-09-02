@@ -187,6 +187,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </div>
             </div>
           )}
+
+          {/* Prayer Inspiration Mini-Card */}
+          <div className="pt-3">
+            <div className="relative rounded-xl overflow-hidden border border-amber-500/20 p-3 bg-gradient-to-t from-slate-950 via-slate-900/90 to-transparent">
+              <img 
+                src="/images/prayer-peace.jpg" 
+                alt="Oración y Paz" 
+                className="absolute inset-0 w-full h-full object-cover opacity-20 -z-10"
+              />
+              <p className="text-[11px] font-semibold text-amber-300">Paz en tu Corazón</p>
+              <p className="text-[10px] text-slate-300 italic mt-0.5">"La paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones."</p>
+            </div>
+          </div>
         </div>
 
         {/* Footer info: 100% Private, No Login */}

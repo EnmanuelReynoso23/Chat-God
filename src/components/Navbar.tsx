@@ -34,9 +34,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <div className="flex items-center gap-2.5 cursor-pointer" onClick={onNewChat}>
-            <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-600 via-amber-500 to-yellow-300 shadow-md shadow-amber-500/20">
-              <Sparkles className="w-5 h-5 text-slate-950 animate-pulse" />
-              <div className="absolute -inset-0.5 bg-amber-400/30 rounded-xl blur-sm -z-10 animate-pulse-glow" />
+            <div className="relative flex items-center justify-center w-9 h-9 rounded-xl overflow-hidden border border-amber-400/40 shadow-md shadow-amber-500/20">
+              <img 
+                src="/divine_avatar.jpg" 
+                alt="Logo Divino" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute -inset-0.5 bg-amber-400/20 rounded-xl blur-sm -z-10 animate-pulse-glow" />
             </div>
             <div className="flex flex-col">
               <span className="text-base sm:text-lg font-bold tracking-tight gold-gradient-text flex items-center gap-1.5">
