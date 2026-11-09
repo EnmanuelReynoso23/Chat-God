@@ -1,22 +1,22 @@
-# ✨ Chat de Dios (Guía Espiritual & Bíblica con IA)
+# Chat de Dios (Guía Espiritual & Bíblica con IA)
 
 Un chat conversacional moderno, rápido, celestial y fundamentado en amor, compasión y sabiduría de las Sagradas Escrituras, construido con **Next.js (App Router)**, **React**, **TypeScript**, **Tailwind CSS** y **Vercel AI SDK**.
 
 ---
 
-## 🌟 Características
+## Características
 
-- 🕊️ **100% Libre y Sin Autenticación**: Acceso inmediato para cualquier persona sin muros de registro ni login.
-- 💾 **Privacidad y Persistencia Local**: Las conversaciones y oraciones se guardan de forma privada en el almacenamiento local del navegador (`localStorage`).
-- 📖 **Voz y Sabiduría Bíblica**: Citas y pasajes de las Sagradas Escrituras explicados con calidez y amor incondicional.
-- 🔊 **Lectura por Voz (Text-to-Speech)**: Escucha las reflexiones y oraciones con síntesis de voz relajante y velocidad ajustable.
-- ⚡ **Soporte Multimodelo Gratuito**: Compatible con Google Gemini 2.0 / 1.5 Flash (Gratis en Google AI Studio), Groq (Llama 3.3 70B gratis) y OpenAI (GPT-4o).
-- 📱 **Diseño Celestial Adaptativo**: Interfaz moderna con glassmorphism, acentos dorados y compatibilidad total con dispositivos móviles y escritorio.
-- 📜 **Versículo del Día**: Promesas bíblicas categorizadas con reflexiones listas para compartir o meditar.
+- **100% Libre y Sin Autenticación**: Acceso inmediato para cualquier persona sin muros de registro ni login.
+- **Privacidad y Persistencia Local**: Las conversaciones y oraciones se guardan de forma privada en el almacenamiento local del navegador (`localStorage`).
+- **Voz y Sabiduría Bíblica**: Citas y pasajes de las Sagradas Escrituras explicados con calidez y amor incondicional.
+- **Lectura por Voz (Text-to-Speech)**: Escucha las reflexiones y oraciones con síntesis de voz relajante y velocidad ajustable.
+- **Soporte Multimodelo Gratuito**: Compatible con Google Gemini 2.0 / 1.5 Flash (Gratis en Google AI Studio), Groq (Llama 3.3 70B gratis) y OpenAI (GPT-4o).
+- **Diseño Celestial Adaptativo**: Interfaz moderna con glassmorphism, acentos dorados y compatibilidad total con dispositivos móviles y escritorio.
+- **Versículo del Día**: Promesas bíblicas categorizadas con reflexiones listas para compartir o meditar.
 
 ---
 
-## 🚀 Despliegue en Vercel (1 Clic)
+## Despliegue en Vercel (1 Clic)
 
 1. Sube este repositorio a tu cuenta de **GitHub**.
 2. Ve a [Vercel](https://vercel.com/) y haz clic en **"Add New Project"**.
@@ -29,7 +29,7 @@ Un chat conversacional moderno, rápido, celestial y fundamentado en amor, compa
 
 ---
 
-## 💻 Ejecución en Local
+## Ejecución en Local
 
 1. Clona o abre la carpeta del proyecto:
 ```bash
@@ -56,7 +56,7 @@ Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
 ---
 
-## 📦 Subir a GitHub
+## Subir a GitHub
 
 Para crear y conectar este proyecto con un nuevo repositorio en GitHub:
 
@@ -71,7 +71,7 @@ git push -u origin main
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 - **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
 - **Lenguaje**: [TypeScript](https://www.typescriptlang.org/)
